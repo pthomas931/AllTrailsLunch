@@ -1,0 +1,36 @@
+.container {
+  min-height: 100vh;
+  height: 100vh;
+  background-color: whitesmoke;
+}
+
+.toolbar {
+  height: 4em;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 2px gray;
+  background-color: white;
+}
+
+.logo {
+  flex: 0 1 auto;
+  padding: 3em;
+}
+
+.search {
+  flex: auto;
+}
+
+.content {
+  height: calc(100vh - 4em);
+  display: flex;
+  flex-flow: row;
+}
+
+.leftDrawer {
+  width: 20%;
+}
+
+.map {
+  flex: auto;
+}

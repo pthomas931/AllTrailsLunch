@@ -1,0 +1,17 @@
+.card {
+  margin: 0.75em;
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 0.25em;
+  display: flex;
+  box-shadow: 1px 1px 3px gray;
+}
+
+.image {
+  flex: 0 1 auto;
+}
+
+.spotContent {
+  flex: auto;
+  padding-left: 1em;
+}
