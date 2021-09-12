@@ -3,19 +3,14 @@ import { FC } from "react";
 import LunchSpot from "./LunchSpot";
 
 interface LunchListProps {
-  lunchPlaces: any[];
+  lunchPlaces: google.maps.places.PlaceResult[];
 }
 
-const LunchList: FC<LunchListProps> = ({
-  lunchPlaces = [
-    { name: "kenmore", summary: "hi there", rating: 4.5 },
-    { name: "kenmore", summary: "hi there", rating: 4.5 },
-  ],
-}) => {
+const LunchList: FC<LunchListProps> = ({ lunchPlaces = [] }) => {
   return (
     <>
-      {lunchPlaces.map((currLunchSpot) => (
-        <LunchSpot key={currLunchSpot.name} />
+      {lunchPlaces.map((currPlace) => (
+        <LunchSpot key={currPlace.place_id} lunchSpot={currPlace} />
       ))}
     </>
   );
