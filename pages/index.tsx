@@ -1,11 +1,17 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  InfoWindow,
+  Marker,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 
 import styles from "./Home.module.css";
 import { FormEvent, useCallback, useState } from "react";
 import LunchList from "./components/LunchList";
+import LunchSpot from "./components/LunchList/LunchSpot";
 
 const Home: NextPage = () => {
   const { isLoaded } = useJsApiLoader({
@@ -15,6 +21,11 @@ const Home: NextPage = () => {
   });
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
+
+  const [selectedPlace, setSelectedPlace] = useState<
+    google.maps.places.PlaceResult | undefined
+  >(undefined);
+
   const [places, setPlaces] = useState<google.maps.places.PlaceResult[]>([]);
   const [search, setSearch] = useState("");
 
@@ -97,15 +108,22 @@ const Home: NextPage = () => {
               onUnmount={onUnmount}
             >
               {places.map(
-                ({ place_id, geometry, name }) =>
-                  geometry?.location && (
+                (currPlace) =>
+                  currPlace.geometry?.location && (
                     <Marker
-                      key={place_id}
-                      position={geometry?.location}
+                      key={currPlace.place_id}
+                      position={currPlace.geometry?.location}
                       clickable
-                      title={name}
+                      title={currPlace.name}
+                      onClick={() => setSelectedPlace(currPlace)}
                     />
                   )
+              )}
+
+              {selectedPlace !== undefined && (
+                <InfoWindow position={selectedPlace.geometry?.location}>
+                  <LunchSpot lunchSpot={selectedPlace} />
+                </InfoWindow>
               )}
             </GoogleMap>
           )}
