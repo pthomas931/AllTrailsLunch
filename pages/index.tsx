@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import Head from "next/head";
+
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 import styles from "./Home.module.css";
 import { FormEvent, useCallback, useState } from "react";
@@ -12,7 +14,7 @@ const Home: NextPage = () => {
     libraries: ["places"],
   });
 
-  const [map, setMap] = useState<google.maps.Map<Element> | null>(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null);
   const [places, setPlaces] = useState<google.maps.places.PlaceResult[]>([]);
   const [search, setSearch] = useState("");
 
@@ -54,19 +56,27 @@ const Home: NextPage = () => {
 
       placesService.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK)
-          setPlaces(results);
+          setPlaces(results !== null ? results : []);
       });
     }
   };
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>AllTrails Lunch</title>
+      </Head>
       <div className={styles.toolbar}>
         <div className={styles.logo}>logo</div>
         <div className={styles.search}>
-          <button onClick={() => {}}>Sort</button>
+          <button onClick={() => {}} className={styles.filterButton}>
+            Filter
+          </button>
           <form onSubmit={handleSearch}>
-            <input onChange={(e) => setSearch(e.target.value)} />
+            <input
+              onChange={(e) => setSearch(e.target.value)}
+              className={styles.searchInput}
+            />
           </form>
         </div>
       </div>
@@ -85,7 +95,19 @@ const Home: NextPage = () => {
               zoom={10}
               onLoad={onLoad}
               onUnmount={onUnmount}
-            />
+            >
+              {places.map(
+                ({ place_id, geometry, name }) =>
+                  geometry?.location && (
+                    <Marker
+                      key={place_id}
+                      position={geometry?.location}
+                      clickable
+                      title={name}
+                    />
+                  )
+              )}
+            </GoogleMap>
           )}
         </div>
       </div>

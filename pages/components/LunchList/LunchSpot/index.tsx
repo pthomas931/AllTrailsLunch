@@ -13,24 +13,19 @@ const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot }) => {
       ? lunchSpot.photos[0]
       : undefined;
 
-  const imageUrl = image !== undefined ? image.getUrl() : undefined;
+  const imageUrl = image !== undefined ? image.getUrl() : "";
 
   return (
     <div className={styles.card}>
-      <div className={styles.image}>
-        {imageUrl !== undefined && (
-          <Image
-            src={imageUrl}
-            height={80}
-            width={80}
-            alt={"Lunch spot image"}
-          />
-        )}
-      </div>
+      {imageUrl !== undefined && (
+        <Image src={imageUrl} height={80} width={80} alt={"Lunch spot image"} />
+      )}
       <div className={styles.spotContent}>
         <div className={styles.spotTitle}>{lunchSpot.name}</div>
-        <div>{lunchSpot.rating}</div>
-        <div>summary</div>
+        <div>
+          {lunchSpot.rating}({lunchSpot.user_ratings_total || 0})
+        </div>
+        <div>{lunchSpot.price_level} summary</div>
       </div>
     </div>
   );
