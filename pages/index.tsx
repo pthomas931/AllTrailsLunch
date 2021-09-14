@@ -59,8 +59,8 @@ const Home: NextPage = () => {
       const request = {
         location: map.getCenter(),
         radius: 500,
-        type: "food",
-        search,
+        type: "restaurant",
+        keyword: search,
       };
 
       placesService.nearbySearch(request, (results, status) => {
