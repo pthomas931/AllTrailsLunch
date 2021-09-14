@@ -1,0 +1,9 @@
+.listItem {
+  margin: 0.75em;
+}
+
+.listItemSelected {
+  margin: 0.75em;
+  border: 3px solid #46851e;
+  border-radius: 0.25em;
+}

@@ -34,8 +34,6 @@ const Home: NextPage = () => {
 
   const onLoad = useCallback(
     function callback(map) {
-      const bounds = new window.google.maps.LatLngBounds();
-      map.fitBounds(bounds);
       setMap(map);
 
       if (placesService === null) {
@@ -93,7 +91,11 @@ const Home: NextPage = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.leftDrawer}>
-          <LunchList lunchPlaces={places} />
+          <LunchList
+            lunchPlaces={places}
+            setSelectedPlace={setSelectedPlace}
+            selectedPlace={selectedPlace}
+          />
         </div>
         <div className={styles.map}>
           {isLoaded && (
@@ -102,10 +104,10 @@ const Home: NextPage = () => {
                 width: "100%",
                 height: "100%",
               }}
-              center={{ lat: 38.898108, lng: -77.018938 }}
-              zoom={10}
+              zoom={12}
               onLoad={onLoad}
               onUnmount={onUnmount}
+              center={{ lat: 38.896659, lng: -77.018689 }}
             >
               {places.map(
                 (currPlace) =>
@@ -121,7 +123,10 @@ const Home: NextPage = () => {
               )}
 
               {selectedPlace !== undefined && (
-                <InfoWindow position={selectedPlace.geometry?.location}>
+                <InfoWindow
+                  position={selectedPlace.geometry?.location}
+                  onCloseClick={() => setSelectedPlace(undefined)}
+                >
                   <LunchSpot lunchSpot={selectedPlace} />
                 </InfoWindow>
               )}

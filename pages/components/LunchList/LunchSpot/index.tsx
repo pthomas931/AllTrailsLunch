@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./LunchSpot.module.css";
-
+import ReactStars from "react-rating-stars-component";
 import Image from "next/image";
 
 interface LunchSpotProps {
@@ -13,19 +13,33 @@ const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot }) => {
       ? lunchSpot.photos[0]
       : undefined;
 
-  const imageUrl = image !== undefined ? image.getUrl() : "";
+  const imageUrl = image !== undefined ? image.getUrl() : undefined;
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} id={lunchSpot.place_id}>
       {imageUrl !== undefined && (
         <Image src={imageUrl} height={80} width={80} alt={"Lunch spot image"} />
       )}
       <div className={styles.spotContent}>
         <div className={styles.spotTitle}>{lunchSpot.name}</div>
-        <div>
-          {lunchSpot.rating}({lunchSpot.user_ratings_total || 0})
+        <div className={styles.spotRating}>
+          <ReactStars
+            count={5}
+            value={lunchSpot.rating}
+            isHalf={true}
+            edit={false}
+            size={24}
+            activeColor="#ffd700"
+          />
+          <div>({lunchSpot.user_ratings_total || 0})</div>
         </div>
-        <div>{lunchSpot.price_level} summary</div>
+        <div className={styles.spotDetails}>
+          <span className={styles.spotPrice}>
+            {"$".repeat(lunchSpot?.price_level || 1)}
+          </span>
+          <span className={styles.divider}>-</span>
+          <div className={styles.spotSummary}>Summary</div>
+        </div>
       </div>
     </div>
   );
