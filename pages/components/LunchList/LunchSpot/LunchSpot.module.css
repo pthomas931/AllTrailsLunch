@@ -40,3 +40,7 @@
 .spotSummary {
   flex: 1 1 auto;
 }
+
+.spotFavorite {
+  flex: 0 1 auto;
+}

@@ -2,6 +2,9 @@ import { FC } from "react";
 import styles from "./LunchSpot.module.css";
 import ReactStars from "react-rating-stars-component";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const DynamicFavorite = dynamic(() => import("./Favorite"), { ssr: false });
 
 interface LunchSpotProps {
   lunchSpot: google.maps.places.PlaceResult;
@@ -40,6 +43,9 @@ const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot }) => {
           <span className={styles.divider}>-</span>
           <div className={styles.spotSummary}>Summary</div>
         </div>
+      </div>
+      <div className={styles.spotFavorite}>
+        {lunchSpot.place_id && <DynamicFavorite placeId={lunchSpot.place_id} />}
       </div>
     </div>
   );
