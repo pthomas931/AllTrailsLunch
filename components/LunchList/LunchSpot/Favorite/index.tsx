@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { writeStorage, useLocalStorage } from "@rehooks/local-storage";
+import useStorage from "../../../../utils/useStorage";
 import styles from "./Favorite.module.css";
 
 interface FavoriteProps {
@@ -7,14 +7,14 @@ interface FavoriteProps {
 }
 
 const Favorite: FC<FavoriteProps> = ({ placeId }) => {
-  const [favValue, , removeFav] = useLocalStorage(placeId);
+  const { storedValue, setValue, removeValue } = useStorage(placeId);
 
-  const isFav = !!favValue;
+  const isFav = storedValue !== undefined;
 
   return (
     <button
       onClick={() => {
-        isFav ? removeFav() : writeStorage(placeId, true);
+        isFav ? removeValue() : setValue("true");
       }}
       className={`${styles.heartLikeButton} ${isFav ? styles.liked : ""}`}
     />

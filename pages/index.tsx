@@ -10,8 +10,8 @@ import {
 
 import styles from "./Home.module.css";
 import { FormEvent, useCallback, useState } from "react";
-import LunchList from "./components/LunchList";
-import LunchSpot from "./components/LunchList/LunchSpot";
+import LunchList from "../components/LunchList";
+import LunchSpot from "../components/LunchList/LunchSpot";
 
 const Home: NextPage = () => {
   const { isLoaded } = useJsApiLoader({
