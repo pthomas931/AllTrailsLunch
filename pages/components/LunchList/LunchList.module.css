@@ -1,5 +1,6 @@
 .listItem {
   margin: 0.75em;
+  border: 1px solid #e5e5e5;
 }
 
 .listItemSelected {

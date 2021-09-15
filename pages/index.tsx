@@ -112,6 +112,13 @@ const Home: NextPage = () => {
                 width: "100%",
                 height: "100%",
               }}
+              options={{
+                zoomControl: false,
+                panControl: false,
+                streetViewControl: false,
+                fullscreenControl: false,
+                mapTypeControl: false,
+              }}
               zoom={12}
               onLoad={onLoad}
               onUnmount={onUnmount}
@@ -135,7 +142,7 @@ const Home: NextPage = () => {
                   position={selectedPlace.geometry?.location}
                   onCloseClick={() => setSelectedPlace(undefined)}
                 >
-                  <LunchSpot lunchSpot={selectedPlace} />
+                  <LunchSpot lunchSpot={selectedPlace} showFavorite={false} />
                 </InfoWindow>
               )}
             </GoogleMap>

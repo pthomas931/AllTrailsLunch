@@ -8,9 +8,10 @@ const DynamicFavorite = dynamic(() => import("./Favorite"), { ssr: false });
 
 interface LunchSpotProps {
   lunchSpot: google.maps.places.PlaceResult;
+  showFavorite?: boolean;
 }
 
-const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot }) => {
+const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot, showFavorite = true }) => {
   const image =
     lunchSpot?.photos !== undefined && lunchSpot.photos.length > 0
       ? lunchSpot.photos[0]
@@ -45,7 +46,9 @@ const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot }) => {
         </div>
       </div>
       <div className={styles.spotFavorite}>
-        {lunchSpot.place_id && <DynamicFavorite placeId={lunchSpot.place_id} />}
+        {showFavorite && lunchSpot.place_id && (
+          <DynamicFavorite placeId={lunchSpot.place_id} />
+        )}
       </div>
     </div>
   );
