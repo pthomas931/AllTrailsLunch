@@ -5,16 +5,23 @@
 }
 
 .toolbar {
-  height: 4em;
+  height: 5em;
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 2px gray;
   background-color: white;
-  padding: 0 3em;
+  padding-left: 3em;
 }
 
 .logo {
   flex: 0 1 auto;
+}
+
+.logoSubtitle {
+  font-size: 36px;
+  color: lightgrey;
+  padding-left: 8px;
+  font-weight: lighter;
+  font-family: "Arial";
 }
 
 .search {
@@ -24,20 +31,28 @@
 }
 
 .filterButton {
-  border-radius: 3px;
+  background: white;
+  font-size: 16px;
+  color: #8d8d8d;
+  border-radius: 8px;
+  border: 2px solid #f0f0f0;
+  padding: 0 1em;
 }
 
 .searchInput {
   margin: 0 2em;
-  padding: 1em 1.25em;
-  border: 1px solid gray;
-  border-radius: 3px;
+  padding: 0.75em 1.25em;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  width: 26em;
   font-weight: bold;
   color: gray;
+  font-size: 16px;
 }
 
 .content {
-  height: calc(100vh - 4em);
+  box-shadow: 0 0px 2px gray inset;
+  height: calc(100vh - 5em);
   display: flex;
   flex-flow: row;
 }

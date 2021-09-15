@@ -5,5 +5,5 @@
 .listItemSelected {
   margin: 0.75em;
   border: 3px solid #46851e;
-  border-radius: 0.25em;
+  border-radius: 8px;
 }

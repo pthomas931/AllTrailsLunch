@@ -1,9 +1,9 @@
 .card {
   padding: 0.75em;
   background-color: white;
-  border-radius: 0.25em;
+  border-radius: 8px;
   display: flex;
-  box-shadow: 1px 1px 3px gray;
+  border: 1px solid #e5e5e5;
 }
 
 .image {

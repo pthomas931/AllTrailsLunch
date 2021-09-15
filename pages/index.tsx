@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-
+import Image from "next/image";
 import {
   GoogleMap,
   InfoWindow,
@@ -76,13 +76,21 @@ const Home: NextPage = () => {
         <title>AllTrails Lunch</title>
       </Head>
       <div className={styles.toolbar}>
-        <div className={styles.logo}>logo</div>
+        <Image
+          src="/alltrailslogo.svg"
+          alt="Logo"
+          height={100}
+          width={200}
+          className={styles.logo}
+        />
+        <div className={styles.logoSubtitle}>at Lunch</div>
         <div className={styles.search}>
           <button onClick={() => {}} className={styles.filterButton}>
             Filter
           </button>
           <form onSubmit={handleSearch}>
             <input
+              placeholder="Search for a restaurant"
               onChange={(e) => setSearch(e.target.value)}
               className={styles.searchInput}
             />
