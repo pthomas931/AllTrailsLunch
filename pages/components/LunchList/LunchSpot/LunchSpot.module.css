@@ -24,6 +24,10 @@
   align-items: center;
 }
 
+.spotRatingTotal {
+  font-weight: lighter;
+}
+
 .spotDetails {
   display: flex;
 }

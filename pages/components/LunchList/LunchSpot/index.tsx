@@ -34,8 +34,11 @@ const LunchSpot: FC<LunchSpotProps> = ({ lunchSpot, showFavorite = true }) => {
             edit={false}
             size={24}
             activeColor="#ffd700"
+            color="#e5e5e5"
           />
-          <div>({lunchSpot.user_ratings_total || 0})</div>
+          <div className={styles.spotRatingTotal}>
+            ({lunchSpot.user_ratings_total || 0})
+          </div>
         </div>
         <div className={styles.spotDetails}>
           <span className={styles.spotPrice}>
