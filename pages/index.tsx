@@ -12,6 +12,7 @@ import styles from "./Home.module.css";
 import { FormEvent, useCallback, useState } from "react";
 import LunchList from "../components/LunchList";
 import LunchSpot from "../components/LunchList/LunchSpot";
+import FilterButton from "../components/FilterButton";
 
 const Home: NextPage = () => {
   const { isLoaded } = useJsApiLoader({
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
 
   const [places, setPlaces] = useState<google.maps.places.PlaceResult[]>([]);
   const [search, setSearch] = useState("");
+  const [sortVal, setSortVal] = useState("highToLow");
 
   const [placesService, setPlacesService] =
     useState<google.maps.places.PlacesService | null>(null);
@@ -85,9 +87,7 @@ const Home: NextPage = () => {
         />
         <div className={styles.logoSubtitle}>at Lunch</div>
         <div className={styles.search}>
-          <button onClick={() => {}} className={styles.filterButton}>
-            Filter
-          </button>
+          <FilterButton sortVal={sortVal} setSortVal={setSortVal} />
           <form onSubmit={handleSearch}>
             <input
               placeholder="Search for a restaurant"
@@ -100,7 +100,14 @@ const Home: NextPage = () => {
       <div className={styles.content}>
         <div className={styles.leftDrawer}>
           <LunchList
-            lunchPlaces={places}
+            lunchPlaces={places.sort((left, right) => {
+              const leftRating = left.rating || 0;
+              const rightRating = right.rating || 0;
+
+              return sortVal === "highToLow"
+                ? rightRating - leftRating
+                : leftRating - rightRating;
+            })}
             setSelectedPlace={setSelectedPlace}
             selectedPlace={selectedPlace}
           />
