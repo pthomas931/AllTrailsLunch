@@ -35,6 +35,7 @@ const LunchList: FC<LunchListProps> = ({
               ? styles.listItemSelected
               : styles.listItem
           }
+          data-testid="lunchSpotListItem"
         >
           <LunchSpot lunchSpot={currPlace} />
         </div>

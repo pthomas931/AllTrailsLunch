@@ -2,20 +2,13 @@ import React from "react";
 
 import { render, screen } from "@testing-library/react";
 import LunchSpot from ".";
-
-const mockSpot: google.maps.places.PlaceResult = {
-  place_id: "apples",
-  name: "bananas",
-  photos: [],
-  rating: 4,
-  user_ratings_total: 22,
-  price_level: 3,
-};
+import mockPlaces from "../../../utils/testing/mockPlaces";
 
 describe("LunchSpot", () => {
-  it("renders a heart", () => {
-    render(<LunchSpot lunchSpot={mockSpot} showFavorite={true} />);
+  it("renders name", () => {
+    render(<LunchSpot lunchSpot={mockPlaces[0]} showFavorite={true} />);
 
-    expect(screen.getByText(mockSpot.name)).toBeInTheDocument();
+    const lunchSpotName = mockPlaces[0].name || "";
+    expect(screen.getByText(lunchSpotName)).toBeInTheDocument();
   });
 });
